@@ -1,6 +1,6 @@
 <template>
-    <div class="si-container">
-        here is searchInfo page
+    <div class="pi-container">
+        here is publishInfo page
     </div>
 </template>
 <script>
