@@ -1,24 +1,35 @@
 <template>
     <div class="footer-container">
         <ul class="option-container">
-            <li :class="{option:true,black: 1===indexNum}" @click="choosenOption('publishinfo',1)"></li>
-            <li :class="{option:true,black: 2===indexNum}" @click="choosenOption('searchinfo',2)"></li>
-            <li :class="{option:true,black: 3===indexNum}" @click="choosenOption('collection',3)"></li>
-            <li :class="{option:true,black: 4===indexNum}" @click="choosenOption('sitemail',4)"></li>
+            <li :class="{option:true,blue: 1===indexNum}" @click="choosenOption('publishinfo',1,'发布房源')">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                <p class="nav-title">发布房源</p>
+            </li>
+            <li :class="{option:true,blue: 2===indexNum}" @click="choosenOption('searchinfo',2,'搜索房源')">
+                <i class="fa fa-map-o" aria-hidden="true"></i>
+                <p class="nav-title">搜索房源</p>
+            </li>
+            <li :class="{option:true,blue: 4===indexNum}" @click="choosenOption('sitemail',4,'站内信')">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                <p class="nav-title">站内信</p>
+            </li>
         </ul>
     </div>
 </template>
 <script>
 export default {
-    data () {
+    data () { 
         return {
-            indexNum: 2      
+            indexNum: 2,
+            pageName: '搜索房源'  
         }
     },
     methods: {
-        choosenOption(to,index) {
+        choosenOption(to,index,pageName) {
             this.$router.push(to)
             this.indexNum = index
+            this.pageName = pageName
+            this.$emit("changeHeader",this.pageName)
         }
     }
 }
@@ -29,31 +40,21 @@ export default {
     .option-container {
         width: 100%;
         .option {
+            box-sizing: border-box;
             list-style: none;
             float: left;
-            width: 25%;
+            width: 33.333333%;
             height: 60px;
             text-align: center;
-            &:nth-child(1) {
-                background: url('../../assets/publish.svg') center center no-repeat;
-                background-size: 25%;
-                background-color:rgba(110, 107, 107, 0.459);
-            }
-            &:nth-child(2) {
-                background: url('../../assets/search.svg') center center no-repeat;
-                background-size: 25%;
-            }
-            &:nth-child(3) {
-                background: url('../../assets/collect.svg') center center no-repeat;
-                background-size: 25%;
-            }
-            &:nth-child(4) {
-                background: url('../../assets/message.svg') center center no-repeat;
-                background-size: 25%;
-            }
+            font-size: 20px;
+            padding: 12px 0;
+            color: #4b4949;
         }
-        .black {
-            background-color:rgba(110, 107, 107, 0.459);
+        .nav-title {
+            font-size: 11px;
+        }
+        .blue {
+            color: rgb(114, 166, 233);
         }
     }
 }
