@@ -51,7 +51,7 @@ html,body{
     height: 60px;
     width: 100%;
     line-height: 60px;
-    background-color: #00b0fba8;
+    background-color: rgba(0, 176, 251, 0.659);
     color: #fff;
     font-size: 20px;
     font-weight: bold;

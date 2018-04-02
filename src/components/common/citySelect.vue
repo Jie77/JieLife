@@ -1,129 +1,83 @@
 <template>
     <div class="cs-container">
         <div :class="{cover: isOpen}"></div>
-        <section class="csTitle" @click="showInfo">
+        <section class="csTitle" @click="isOpen = !isOpen">
             <span>区域</span>
             <span :class="{triangle:true, tgRotate:isOpen}"></span>
         </section>
         <section class="cs-info" :class="{infoShow:infoShow}">
             <div class="cs-info-detail info-first" :style="{width: listWidth.first}">
-                <ul v-for="item in firstData" >
-                    <li>{{ item }}</li>
+                <ul v-for="(item, index) in firstData" >
+                    <li @click="first(index)" :class="{ blue: index===firstChoose }">{{ item.name }}</li>
                 </ul>
             </div>
             <div class="cs-info-detail info-second" :style="{width: listWidth.second}">
-                <ul v-for="item in secondData" >
-                    <li>{{ item }}</li>
+                <ul v-for="(item, index) in secondData" >
+                    <li @click="second(index)" :class="{ blue: index===secondChoose }">{{ item.name }}</li>
                 </ul>
             </div>
             <div class="cs-info-detail info-third" :style="{width: listWidth.third}" v-if="rank === 3">
-                <ul v-for="item in thirdData" >
-                    <li>{{ item }}</li>
+                <ul v-for="(item, index) in thirdData" >
+                    <li @click ="third(index,item.thirdId)" :class="{ blue: index===thirdChoose }">{{ item.name }}</li>
                 </ul>
             </div>
         </section>
     </div>
 </template>
 <script>
+import { selectData } from '../conf/selectData'
 export default {
     data () {
         return {
+            selectData,
             isOpen: false,
-            rank: 3,
+            rank: 2,
             infoShow: false,
             listWidth: {
-                first: '20%',
-                second: '30%',
+                first: '50%',
+                second: '50%',
                 third: '50%'
             },
-            firstData: [
-                '区域',
-                '地铁'
-            ],
-            secondData: [
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀',
-                '海淀'
-            ],
-            thirdData: [
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-                '苏州街',
-            ]
+            firstChoose: 0,
+            secondChoose: 0,
+            thirdChoose: 0, 
+            chooseId: -1   
+        }
+    },
+    computed: {
+        firstData: function(){
+            return this.selectData
+        },
+        secondData: function(){
+            return this.selectData[this.firstChoose].secondData
+        },
+        thirdData: function(){
+            return this.selectData[this.firstChoose].secondData[this.secondChoose].thirdData
         }
     },
     methods: {
-        showInfo() {
-            this.isOpen = !this.isOpen
+        first(index) {
+            this.firstChoose = index
+            this.rank = 2
+            this.listWidth.first = '50%'
+            this.listWidth.second = '50%'
+        },
+        second(index) {
+            this.secondChoose = index
+            this.thirdChoose = 0
             this.rank = 3
+            this.listWidth.first = '20%'
+            this.listWidth.second = '30%'
+            this.listWidth.third = '50%'
+        },
+        third(index, chooseId) {
+            this.thirdChoose = index
+            this.isOpen = false
+            this.chooseId = chooseId  //这是最终的过滤条件引索
+        }
+    },
+    watch: {
+        isOpen: function(){
             if(this.isOpen === true){
                 this.infoShow = true
             }else{
@@ -135,6 +89,9 @@ export default {
 </script>
 <style lang="scss">
     .cs-container {
+        .blue {
+            color: #72a6e9;
+        }
         height: 100%;
         position: relative;
         .cover {
