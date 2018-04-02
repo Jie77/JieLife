@@ -13,6 +13,6 @@ export default {
 </script>
 <style lang="scss">
     .si-container {
-        height: calc(100% - 120px);
+        
     }
 </style>

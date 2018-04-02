@@ -93,15 +93,18 @@ export default {
             color: #72a6e9;
         }
         height: 100%;
-        position: relative;
+        width: 100%;
+        position: absolute;
         .cover {
             height: 100%;
             width: 100%;
             background: rgba(0, 0, 0, 0.082);
             position: absolute;
-            z-index: -1;
+            z-index: 3;
         }
         .csTitle {
+            position: relative;
+            z-index: 5;
             background: #fff;
             box-sizing: border-box;
             height: 40px;
@@ -124,9 +127,11 @@ export default {
             }
         }
         .cs-info {
+            position: relative;
+            z-index: 5;
             background: #fff;
             overflow: hidden;
-            transition: all .5s ease-in-out;
+            transition: all .3s ease-in-out;
             transform-origin: 0 0;
             transform: scaleY(0);
             .cs-info-detail {

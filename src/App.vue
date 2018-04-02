@@ -44,7 +44,7 @@ html,body{
   .foot{
     position: fixed;
     bottom: 0;
-    z-index: 2;
+    z-index: 100;
     border-top: 1px solid #c7c4c4
   }
   .headerName {
