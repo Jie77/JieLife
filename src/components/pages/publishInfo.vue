@@ -1,12 +1,14 @@
 <template>
     <div class="pi-container">
         <city-select></city-select>
+        <div class="input-container" style="margin-top: 50px">
+            <input type="number" class="input" v-model="title" placeholder="展示标题">
+        </div>
         <div class="des-container">
             <textarea class="des"></textarea>
         </div>
-        <div class="rent-container">
-            <!-- <input class="rent" v-model="rent" placeholder="租金每月" type='text' onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" /> -->
-            <input type="number" class="rent" v-model="rent" placeholder="租金每月">
+        <div class="input-container">
+            <input type="number" class="input" v-model="rent" placeholder="租金每月">
         </div>
         <label class="photo-upload" for="upload">
             上传图片
@@ -22,6 +24,7 @@ export default {
     },
     data () {
         return {
+            title: '',
             rent: ''
         }
     }
@@ -30,6 +33,7 @@ export default {
 <style lang="scss">
     .pi-container {
         position: relative;
+        top: 30px;
         height: calc(100% - 120px);
         overflow: hidden;
         .photo-upload {
@@ -52,7 +56,7 @@ export default {
             height: 60%;
             display: block;
             margin: 0 auto;
-            margin-top: 50px;
+            margin-top: 10px;
             border: 1px solid rgb(138, 136, 136);
             border-radius: 5px;
             box-sizing: border-box;
@@ -65,15 +69,15 @@ export default {
                 border: none;
             }
         }
-        .rent-container {
+        .input-container {
             box-sizing: border-box;
-            padding-left: 10px;
+            padding:0 10px;
             width: 90%;
             margin: 0 auto;
             margin-top: 10px;
             border: 1px solid rgb(138, 136, 136);
             border-radius: 3px;
-            .rent {
+            .input {
                 display: block;
                 width: 100%;
                 height: 30px;

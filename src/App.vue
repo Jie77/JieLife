@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <div class="headerName">{{ headerName }}</div>
+    <div class="header">
+      <div class="headerName">{{ headerName }}</div>
+      <span class="user">
+        <i class="fa fa-user-o" aria-hidden="true" style="margin-right:5px"></i>{{ userName }}
+      </span>
+    </div>
     <keep-alive><router-view></router-view></keep-alive>
     <foot v-if="isLogin" class="foot" @changeHeader="changeHeader"></foot>
   </div>
@@ -16,7 +21,8 @@ export default {
   data () {
     return {
       isLogin: true,
-      headerName: '搜索房源'
+      headerName: '搜索房源',
+      userName: 'Jie'
     }
   },
   methods: {
@@ -47,16 +53,27 @@ html,body{
     z-index: 100;
     border-top: 1px solid #c7c4c4
   }
-  .headerName {
-    height: 60px;
+  .header {
     width: 100%;
-    line-height: 60px;
-    background-color: rgba(0, 176, 251, 0.659);
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
+    border-bottom: 1px solid #f7f3f3;
+    height: 30px;
     box-sizing: border-box;
-    padding-left: 10px;
+    padding: 0 20px;
+    position: fixed;
+    line-height: 30px;
+    z-index: 10;
+    background: #fff;
+    .headerName {
+      font-size: 14px;
+      float: left;
+      position: relative;
+      left: 50%;
+      margin-left: -28px;
+    }
+    .user {
+      float: right;
+      color: #72a6e9;
+    }
   }
 }
 </style>
