@@ -6,6 +6,7 @@
                 :title="house.title"
                 :place="house.place"
                 :price="house.price" 
+                :key="house.houseId"
             ></card>
         </div>
     </div>
@@ -24,42 +25,44 @@ export default {
                 {
                     title: '这是一个很好很好很好很好办呵呵额呵呵',
                     place: '苏州街',
-                    price: '8000/月'
+                    price: '8000/月',
+                    houseId: 1
                 },
                 {
                     title: '这是一个很好很好很好很好办',
                     place: '苏州街',
-                    price: '8000/月'
+                    price: '8000/月',
+                    houseId: 2
                 },
                 {
                     title: '这是一个很好很好很好很好办',
                     place: '苏州街',
-                    price: '8000/月'
-                },
-                {
-                    title: '这是一个很好很好很好很好办',
-                    place: '苏州街',
-                    price: '8000/月'
+                    price: '8000/月',
+                    houseId: 3
                 },
                 {
                     title: '这是一个很好很好很好很额呵呵呵课程的吧好办',
                     place: '苏州街',
-                    price: '8000/月'
+                    price: '8000/月',
+                    houseId: 4
                 },
                 {
                     title: '这是一个很好很好除好很好办',
                     place: '苏州街',
-                    price: '8000/月'
+                    price: '8000/月',
+                    houseId: 5
                 },
                 {
                     title: '这是一个肯定不肯出兵很好很好很好很好办',
                     place: '苏州街',
-                    price: '8000/月'
+                    price: '8000/月',
+                    houseId: 6
                 },
                 {
                     title: '这是一个很好很好很好很好办',
                     place: '苏州街',
-                    price: '8000/月'
+                    price: '8000/月',
+                    houseId: 7
                 }
             ]
         }

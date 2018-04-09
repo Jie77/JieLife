@@ -2,10 +2,10 @@
     <div class="pi-container">
         <city-select></city-select>
         <div class="input-container" style="margin-top: 50px">
-            <input type="number" class="input" v-model="title" placeholder="展示标题">
+            <input type="text" class="input" v-model="title" placeholder="展示标题">
         </div>
         <div class="des-container">
-            <textarea class="des"></textarea>
+            <textarea class="des" v-model="describe"></textarea>
         </div>
         <div class="input-container">
             <input type="number" class="input" v-model="rent" placeholder="租金每月">
@@ -14,9 +14,13 @@
             上传图片
             <input type="file" style="display:none" id="upload">
         </label>
+        <label class="photo-upload" @click="submit">
+            发布
+        </label>
     </div>
 </template>
 <script>
+import axios from '@/http'
 import citySelect from '../common/citySelect'
 export default {
     components: {
@@ -25,7 +29,23 @@ export default {
     data () {
         return {
             title: '',
+            describe: '',
             rent: ''
+        }
+    },
+    methods: {
+        async submit() {
+            let param = new URLSearchParams()
+            param.append('title',this.title)
+            param.append('describe',this.describe)
+            param.append('rent',this.rent)
+            try {
+                let data = await axios.post('http://127.0.0.1:3000/login',param)
+                console.log(data)
+            }catch(e) {
+                console.log("error")
+            }
+            
         }
     }
 }
@@ -53,7 +73,7 @@ export default {
             position: relative;
             z-index: 1;
             width: 90%;
-            height: 60%;
+            height: 40%;
             display: block;
             margin: 0 auto;
             margin-top: 10px;
