@@ -1,3 +1,5 @@
+const path = require('path')
+const fs = require('fs')
 const Koa = require('koa')
 const Router = require('koa-router')
 const koaBody = require('koa-body')
@@ -7,11 +9,26 @@ const Port = 3000
 
 let router = new Router()
 
-app.use(cors())
+app.use(cors({
+  origin: '*'
+}))
+
+app.use(koaBody({ multipart: true }))
 
 router.post('/login',async (ctx,next)=>{
-  let postData = await parsePostData( ctx )
-  ctx.body = postData
+
+  let photos = ctx.request.body.files || {}
+  console.log(photos)
+  for(let key in photos) {
+    let photo = photos[key]
+    let filePath = path.join(__dirname, `${photo.name}.${photo.type.split('/')[1]}`)
+    let reader = fs.createReadStream(photo.path)
+    let writer = fs.createWriteStream(filePath)
+    reader.pipe(writer)
+  }
+
+  ctx.body = ctx.request.body
+
 })
 
 app.use(router.routes())
@@ -21,30 +38,3 @@ app.listen(Port,()=>{
   console.log(`Listening on ${Port}`)
 })
 
-function parsePostData(ctx){
-  return new Promise((resolve,reject)=>{
-    try{
-      let postData = ''
-      ctx.req.on('data',(data)=>{
-        postData += data
-      })
-      ctx.req.on('end',()=>{
-        postData = parseData(postData)
-        resolve(postData)
-      })
-    }catch(e){
-      reject(e)
-    }
-  })
-}
-
-function parseData(str){
-  let res = {}
-  let arr = str.split('&')
-  let t = null
-  for(let item of arr){
-    t = item.split('=')
-    res[t[0]] = decodeURI(t[1])
-  }
-  return res
-}
