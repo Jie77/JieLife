@@ -1,6 +1,6 @@
 <template>
     <div class="cs-container">
-        <div :class="{cover: isOpen}"></div>
+        <div class="cover"  v-if="isOpen"></div>
         <section class="csTitle" @click="isOpen = !isOpen">
             <span>区域</span>
             <span :class="{triangle:true, tgRotate:isOpen}"></span>
@@ -18,7 +18,7 @@
             </div>
             <div class="cs-info-detail info-third" :style="{width: listWidth.third}" v-if="rank === 3">
                 <ul v-for="(item, index) in thirdData" >
-                    <li @click ="third(index,item.thirdId)" :class="{ blue: index===thirdChoose }">{{ item.name }}</li>
+                    <li @click ="third(index,item.thirdId,item.name)" :class="{ blue: index===thirdChoose }">{{ item.name }}</li>
                 </ul>
             </div>
         </section>
@@ -41,7 +41,8 @@ export default {
             firstChoose: 0,
             secondChoose: 0,
             thirdChoose: 0, 
-            chooseId: -1   
+            chooseId: -1,
+            chooseName: ''
         }
     },
     computed: {
@@ -70,10 +71,12 @@ export default {
             this.listWidth.second = '30%'
             this.listWidth.third = '50%'
         },
-        third(index, chooseId) {
+        third(index, chooseId, chooseName) {
             this.thirdChoose = index
             this.isOpen = false
             this.chooseId = chooseId  //这是最终的过滤条件引索
+            this.chooseName = chooseName
+            this.$emit('getPlace',chooseId,chooseName)
         }
     },
     watch: {
@@ -89,17 +92,17 @@ export default {
 </script>
 <style lang="scss">
     .cs-container {
-        .blue {
-            color: #72a6e9;
-        }
         height: 100%;
         width: 100%;
         position: absolute;
+        .blue {
+            color: #72a6e9;
+        }
         .cover {
             height: 100%;
             width: 100%;
             background: rgba(0, 0, 0, 0.2);
-            position: absolute;
+            position: fixed;
             z-index: 3;
         }
         .csTitle {

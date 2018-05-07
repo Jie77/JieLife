@@ -6,7 +6,7 @@
         <i class="fa fa-user-o" aria-hidden="true" style="margin-right:5px"></i>{{ userName }}
       </span>
     </div>
-    <keep-alive><router-view></router-view></keep-alive>
+    <router-view></router-view>
     <foot v-if="isLogin" class="foot" @changeHeader="changeHeader"></foot>
   </div>
 </template>
