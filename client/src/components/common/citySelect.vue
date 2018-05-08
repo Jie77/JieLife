@@ -92,18 +92,10 @@ export default {
 </script>
 <style lang="scss">
     .cs-container {
-        height: 100%;
         width: 100%;
         position: absolute;
         .blue {
             color: #72a6e9;
-        }
-        .cover {
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            position: fixed;
-            z-index: 3;
         }
         .csTitle {
             position: relative;
@@ -137,6 +129,7 @@ export default {
             transition: all .3s ease-in-out;
             transform-origin: 0 0;
             transform: scaleY(0);
+            border-bottom: 1px solid #c7c4c4;
             .cs-info-detail {
                 box-sizing: border-box;
                 float: left;

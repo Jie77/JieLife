@@ -70,10 +70,12 @@ export default {
                 }
             }
 
-            axios.post('http://127.0.0.1:3000/publish',param,config).then(res=>{
+            axios.post('http://192.168.43.97:3000/publish',param,config).then(res=>{
                 console.log(res)
+                alert('success')
             }).catch(e=>{
                 console.log('error:'+e)
+                alert('error')
             })
             
         }
@@ -136,7 +138,7 @@ export default {
         overflow: hidden;
         .btn-style {
             position: relative;
-            z-index: 2;
+            
             display: block;
             width: 90%;
             height: 40px;
@@ -149,7 +151,7 @@ export default {
         }
         .des-container {
             position: relative;
-            z-index: 1;
+            
             width: 90%;
             height: 40%;
             display: block;
@@ -182,7 +184,7 @@ export default {
                 outline: none;
                 border: none;
                 position: relative;
-                z-index: 2;
+                
             }
         }
     }

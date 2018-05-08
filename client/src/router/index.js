@@ -6,6 +6,7 @@ import Collection from '@/components/pages/collection'
 import PublishInfo from '@/components/pages/publishInfo'
 import SearchInfo from '@/components/pages/searchInfo'
 import SiteMail from '@/components/pages/siteMail'
+import InfoDetail from '@/components/pages/infoDetail'
 
 Vue.use(Router)
 
@@ -41,5 +42,10 @@ export default new Router({
       name: 'sitemail',
       component: SiteMail
     },
+    {
+      path: '/infodetail',
+      name: 'infodetail',
+      component: InfoDetail
+    }
   ]
 })

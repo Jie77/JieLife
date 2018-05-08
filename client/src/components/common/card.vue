@@ -5,8 +5,8 @@
         </div>
         <div class="card-text">
             <p class="title">{{ title }}</p>
-            <p class="place">{{ place }}</p>
-            <p class="price">{{ price }}</p>
+            <p class="place">地点：{{ place }}</p>
+            <p class="price">{{ price }}/月</p>
         </div>
     </div>
 </template>

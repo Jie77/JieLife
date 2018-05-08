@@ -9,7 +9,7 @@
                 <i class="fa fa-map-o" aria-hidden="true"></i>
                 <p class="nav-title">搜索房源</p>
             </li>
-            <li :class="{option:true,blue: 3===indexNum}" @click="choosenOption('sitemail',4,'站内信')">
+            <li :class="{option:true,blue: 3===indexNum}" @click="choosenOption('sitemail',3,'站内信')">
                 <i class="fa fa-commenting-o" aria-hidden="true"></i>
                 <p class="nav-title">站内信</p>
             </li>

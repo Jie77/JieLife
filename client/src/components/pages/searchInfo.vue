@@ -2,14 +2,14 @@
     <div class="si-container">
         <city-select></city-select>
         <div class="showInfo">
-            <router-link to="/sitemail" v-for="house in houses" >
+            <div v-for="house in houses" @click="goDetail(house.pageId)">
                 <card
                     :title="house.title"
                     :place="house.place"
                     :price="house.rent" 
-                    :key="house.houseId"
+                    :key="house.pageId"
                 ></card>
-            </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -29,12 +29,17 @@ export default {
     },
     created () {
         let self = this
-        axios.get('http://127.0.0.1:3000/search').then((res)=>{
+        axios.get('http://192.168.43.97:3000/search').then((res)=>{
             self.houses = res.data
             console.log(res)
         }).catch(e=>{
             console.log(e)
         })
+    },
+    methods: {
+        goDetail(id) {
+            this.$router.push({ name: 'infodetail', params: { id }})
+        }
     }
 }
 </script>
@@ -47,6 +52,8 @@ export default {
         height: calc(100% - 90px);
         .showInfo {
             margin-top: 40px;
+            position: relative;
+            z-index: 1;
         }
     }
 </style>
