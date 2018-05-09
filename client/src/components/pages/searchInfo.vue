@@ -8,6 +8,7 @@
                     :place="house.place"
                     :price="house.rent" 
                     :key="house.pageId"
+                    :pageId="house.pageId"
                 ></card>
             </div>
         </div>
@@ -29,7 +30,7 @@ export default {
     },
     created () {
         let self = this
-        axios.get('http://192.168.43.97:3000/search').then((res)=>{
+        axios.get('http://127.0.0.1:3000/search').then((res)=>{
             self.houses = res.data
             console.log(res)
         }).catch(e=>{

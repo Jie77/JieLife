@@ -70,7 +70,7 @@ export default {
                 }
             }
 
-            axios.post('http://192.168.43.97:3000/publish',param,config).then(res=>{
+            axios.post('http://127.0.0.1:3000/publish',param,config).then(res=>{
                 console.log(res)
                 alert('success')
             }).catch(e=>{

@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="img-container">
-            <img src="" alt="">
+            <img :src="src" alt="" style="width:100%">
         </div>
         <div class="card-text">
             <p class="title">{{ title }}</p>
@@ -11,6 +11,7 @@
     </div>
 </template>
 <script>
+import axios from '@/http'
 export default {
     props: {
         title: {
@@ -24,7 +25,29 @@ export default {
         price: {
             type: String,
             default: '暂无报价'
+        },
+        pageId: {
+            type: String,
+            default: ''
         }
+    },
+    data () {
+        return {
+            src: ''
+        }
+    },
+    created () {
+        let self = this
+        axios.get('http://127.0.0.1:3000/detail',{
+            params: {
+                id: self.pageId
+            }
+        }).then((res)=>{
+            console.log(res)
+            self.src = res.data[0].imageList[0]
+        }).catch(e=>{
+            console.log(e)
+        })
     }
 }
 </script>
@@ -38,7 +61,6 @@ export default {
     .img-container {
         width: 90px;
         height: 60px;
-        border: 1px solid #000;
         float: left;
         margin-right: 30px;
     }
