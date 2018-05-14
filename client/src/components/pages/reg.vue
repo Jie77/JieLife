@@ -12,18 +12,13 @@
                 <input type="password" name="pwd" v-model="pwd" placeholder="密码" class="login-input">
             </div>
             <div class="login-btn-container">
-                <button class="login-btn" @click="login">登录</button>
-            </div>
-            <div class="tip">
-                <span class="forget">忘记密码？</span>
-                <span class="new">新用户注册</span>
+                <button class="login-btn" @click="regist">注册</button>
             </div>
         </section>
     </div>
 </template>
 <script>
 import axios from '@/http'
-import store from '@/store'
 export default {
     data () {
         return {
@@ -45,17 +40,12 @@ export default {
         // })
     },
     methods: {
-        login() {
+        regist() {
             let param = new FormData()
             param.append('user',this.user)
             param.append('pwd',this.pwd)
-            axios.post('http://127.0.0.1:3000/login',param).then(res=>{
-                console.log(res.data.message)
-                let data = {
-                    token: res.data.message,
-                    user: this.user
-                }
-                store.commit('login',data)
+            axios.post('http://127.0.0.1:3000/reg',param).then(res=>{
+                console.log(res)
                 alert('success')
             }).catch(e=>{
                 console.log('error:'+e)
@@ -64,6 +54,7 @@ export default {
             
         }
     }
+
 }
 </script>
 <style lang="scss">
@@ -146,19 +137,6 @@ export default {
                 outline: none;
             }
             
-        }
-        .tip {
-            width: 100%;
-            margin: 0 auto;
-            margin-top: 3px;
-            font-size: 0.8rem;
-            color: #fff;
-            .forget {
-                float: left;
-            }
-            .new {
-                float: right;
-            }
         }
     }
     .showAnimate {

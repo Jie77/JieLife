@@ -3,25 +3,25 @@
         <city-select></city-select>
         <div class="showInfo">
             <div v-for="house in houses" @click="goDetail(house.pageId)">
-                <card
+                <search-card
                     :title="house.title"
                     :place="house.place"
                     :price="house.rent" 
                     :key="house.pageId"
                     :pageId="house.pageId"
-                ></card>
+                ></search-card>
             </div>
         </div>
     </div>
 </template>
 <script>
 import axios from '@/http'
-import card from '../common/card'
+import searchCard from '../common/searchCard'
 import citySelect from '../common/citySelect'
 export default {
     components: {
         citySelect,
-        card: card
+        searchCard: searchCard
     },
     data () {
         return {
