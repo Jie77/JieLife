@@ -6,7 +6,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         token: sessionStorage.getItem('token') || '',
-        user: sessionStorage.getItem('user') || ''
+        user: sessionStorage.getItem('user') || '',
+        nowPath: ''
     },
     mutations: {
         login: (state, data) => {

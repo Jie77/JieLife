@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <div class="header">
+    <div class="header" v-if="!isLoginPage">
       <div class="headerName">{{ headerName }}</div>
       <span class="user">
         <i class="fa fa-user-o" aria-hidden="true" style="margin-right:5px"></i>{{ userName }}
       </span>
     </div>
     <router-view></router-view>
-    <foot v-if="isLogin" class="foot" @changeHeader="changeHeader"></foot>
+    <foot v-if="!isLoginPage" class="foot"></foot>
   </div>
 </template>
 
 <script>
+import store from '@/store'
 import Foot from '@/components/common/footer'
 export default {
   name: 'App',
@@ -20,14 +21,50 @@ export default {
   },
   data () {
     return {
-      isLogin: true,
-      headerName: '搜索房源',
-      userName: 'Jie'
+      isLoginPage: false,
+      headerName: '',
+      userName: store.state.user || '游客'
     }
   },
-  methods: {
-    changeHeader(headerName) {
-      this.headerName = headerName
+  computed: {
+    nowPath() {
+      return this.$route.path
+    }
+  },
+  watch: {
+    nowPath() {
+      store.state.nowPath = this.nowPath
+      console.log(this.nowPath)
+      console.log(store.state.nowPath)
+      switch(this.nowPath){
+        case '/login':
+          this.headerName = '登录'
+          this.isLoginPage = true
+          break
+        case '/reg':
+          this.headerName = '注册'
+          this.isLoginPage = false
+          break
+        case '/publishinfo':
+          this.headerName = '发布'
+          this.isLoginPage = false
+          break
+        case '/searchinfo':
+          this.headerName = '搜索'
+          this.isLoginPage = false
+          break
+        case '/sitemail':
+          this.headerName = '站内信'
+          this.isLoginPage = false
+          break
+        case '/infodetail':
+          this.headerName = '房屋详情'
+          this.isLoginPage = false
+          break
+        case '/msgdetail':
+          this.headerName = '站内信详情'
+          this.isLoginPage = false
+      }
     }
   }
 }
@@ -65,14 +102,14 @@ html,body{
     background: #fff;
     .headerName {
       font-size: 14px;
-      float: left;
-      position: relative;
-      left: 50%;
-      margin-left: -28px;
+      display: table;
+      margin: 0 auto;
     }
     .user {
-      float: right;
+      position: absolute;
       color: #72a6e9;
+      top: 0;
+      right: 20px;
     }
   }
 }

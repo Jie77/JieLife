@@ -3,12 +3,12 @@ import Router from 'vue-router'
 import Login from '@/components/pages/login'
 import store from '@/store.js'
 import Admin from '@/components/pages/admin'
-import Collection from '@/components/pages/collection'
 import PublishInfo from '@/components/pages/publishInfo'
 import SearchInfo from '@/components/pages/searchInfo'
 import SiteMail from '@/components/pages/siteMail'
 import InfoDetail from '@/components/pages/infoDetail'
 import Reg from '@/components/pages/reg'
+import MsgDetail from '@/components/pages/msgDetail'
 
 Vue.use(Router)
 
@@ -37,11 +37,6 @@ const router = new Router({
       }
     },
     {
-      path: '/collection',
-      name: 'collection',
-      component: Collection
-    },
-    {
       path: '/publishinfo',
       name: 'publishinfo',
       component: PublishInfo,
@@ -66,6 +61,14 @@ const router = new Router({
       path: '/infodetail',
       name: 'infodetail',
       component: InfoDetail,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/msgdetail',
+      name: 'msgdetail',
+      component: MsgDetail,
       meta: {
         auth: true
       }

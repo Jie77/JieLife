@@ -56,6 +56,7 @@ export default {
                     user: this.user
                 }
                 store.commit('login',data)
+                this.$router.push('/searchinfo')
                 alert('success')
             }).catch(e=>{
                 console.log('error:'+e)
